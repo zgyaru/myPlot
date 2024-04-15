@@ -1,4 +1,5 @@
-theme_Publication <- function(base_size=14) {
+theme_pb <- function(base_size=14,xlab_angle=0) {
+  ## xlab_angle: 0, 45, or 90
   library(grid)
   library(ggthemes)
   (theme_foundation(base_size=base_size)
@@ -11,20 +12,18 @@ theme_Publication <- function(base_size=14) {
             axis.title = element_text(face = "bold",size = rel(1)),
             axis.title.y = element_text(angle=90,vjust =2),
             axis.title.x = element_text(vjust = -0.2),
-            axis.text = element_text(), 
-            #axis.line = element_line(colour="black"),
-            #axis.ticks = element_line(),
+            #axis.text = element_text(), 
+            axis.line = element_line(colour="black"),
             panel.grid.major = element_blank(),
             panel.grid.minor = element_blank(),
             legend.key = element_rect(colour = NA),
-            legend.position = "top",
-            legend.direction = "horizontal",
-            legend.key.size= unit(1, "cm"),
-            legend.margin = unit(0, "cm"),
-            #legend.title = element_text(face="italic"),
-            plot.margin=unit(c(10,5,5,5),"mm"),
-            strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
-            strip.text = element_text(face="bold")
-    ))
-  
+            legend.position = "right",
+            legend.title.align = 0
+    ) +
+  if(xlab_angle==45){
+    theme(axis.text.x = element_text(angle = 45,hjust = 1,vjust = 1))
+  }else if(xlab_angle==90){
+    theme(axis.text.x = element_text(angle = 90,hjust = 1,vjust = 0.5))
+  })
 }
+
